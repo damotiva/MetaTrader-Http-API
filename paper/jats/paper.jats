@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Publishing DTD v1.2 20190208//EN"
+                  "JATS-publishing1.dtd">
+<article xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink" dtd-version="1.2" article-type="other">
+<front>
+<journal-meta>
+<journal-id></journal-id>
+<journal-title-group>
+<journal-title>Journal of Open Source Software</journal-title>
+<abbrev-journal-title>JOSS</abbrev-journal-title>
+</journal-title-group>
+<issn publication-format="electronic">2475-9066</issn>
+<publisher>
+<publisher-name>Open Journals</publisher-name>
+</publisher>
+</journal-meta>
+<article-meta>
+<article-id pub-id-type="publisher-id">0</article-id>
+<article-id pub-id-type="doi">N/A</article-id>
+<title-group>
+<article-title>MT4WinHTTP: A MetaTrader 4 Library for Bypassing
+WebRequest Restrictions via Low-Level Windows System
+Calls</article-title>
+</title-group>
+<contrib-group>
+<contrib contrib-type="author" equal-contrib="yes" corresp="yes">
+<contrib-id contrib-id-type="orcid">https://orcid.org/0000-0003-2397-9680</contrib-id>
+<name>
+<surname>Masanga</surname>
+<given-names>Elijah E.</given-names>
+</name>
+<xref ref-type="aff" rid="aff-1"/>
+<xref ref-type="aff" rid="aff-2"/>
+<xref ref-type="corresp" rid="cor-1"><sup>*</sup></xref>
+</contrib>
+<aff id="aff-1">
+<institution-wrap>
+<institution>Damotiva, Mbeya, Tanzania</institution>
+</institution-wrap>
+</aff>
+<aff id="aff-2">
+<institution-wrap>
+<institution>ITMO University, Saint Petersburg, Russia</institution>
+<institution-id institution-id-type="ROR">04txgxn49</institution-id>
+</institution-wrap>
+</aff>
+</contrib-group>
+<author-notes>
+<corresp id="cor-1">* E-mail: <email></email></corresp>
+</author-notes>
+<pub-date date-type="pub" publication-format="electronic" iso-8601-date="2025-06-02">
+<day>2</day>
+<month>6</month>
+<year>2025</year>
+</pub-date>
+<volume>¿VOL?</volume>
+<issue>¿ISSUE?</issue>
+<fpage>¿PAGE?</fpage>
+<permissions>
+<copyright-statement>Authors of papers retain copyright and release the
+work under a Creative Commons Attribution 4.0 International License (CC
+BY 4.0)</copyright-statement>
+<copyright-year>1970</copyright-year>
+<copyright-holder>The article authors</copyright-holder>
+<license license-type="open-access" xlink:href="https://creativecommons.org/licenses/by/4.0/">
+<license-p>Authors of papers retain copyright and release the work under
+a Creative Commons Attribution 4.0 International License (CC BY
+4.0)</license-p>
+</license>
+</permissions>
+<kwd-group kwd-group-type="author">
+<kwd>Algorithms</kwd>
+<kwd>Backtesting</kwd>
+<kwd>MQL4</kwd>
+<kwd>MQL5</kwd>
+<kwd>Meta Trader</kwd>
+</kwd-group>
+</article-meta>
+</front>
+<body>
+<sec id="summary">
+  <title>Summary</title>
+  <p>MetaTrader 4 (MT4), a dominant platform for retail algorithmic
+  trading, imposes restrictive HTTP communication policies—including URL
+  whitelisting and disabled network access during
+  backtesting(<xref alt="MetaQuotes Software Corp., 2023" rid="ref-MTDocWebRequest" ref-type="bibr">MetaQuotes
+  Software Corp., 2023</xref>;
+  <xref alt="MetaTrader Community, 2023a" rid="ref-MTForumBacktest" ref-type="bibr">MetaTrader
+  Community, 2023a</xref>) hindering integration with external data
+  sources (e.g., Decentralized Finances (DeFi) feeds, Machine Learning
+  APIs, Web APIs, Telegram Signal Based APIs). We present MT4WinHTTP, an
+  open-source MQL4 library that bypasses these limitations by leveraging
+  direct Windows API calls (ShellExecuteW and WinINet). Key features
+  include:</p>
+  <list list-type="bullet">
+    <list-item>
+      <p><bold>Unrestricted web requests</bold> (no whitelisting
+      required).</p>
+    </list-item>
+    <list-item>
+      <p><bold>Backtesting-compatible</bold> HTTP/HTTPS
+      communication.</p>
+    </list-item>
+    <list-item>
+      <p><bold>Zero external dependencies</bold>, deployable on standard
+      MT4 installations.</p>
+    </list-item>
+  </list>
+  <p>The library bridges MT4 to modern trading infrastructure, enabling
+  strategies reliant on real-time data (e.g., arbitrage, sentiment
+  analysis) and seamless integration with external frameworks (Django,
+  Laravel, Spring, ASP.NET). By decoupling MT4 from its native
+  restrictions, MT4WinHTTP expands the scope of algorithmic trading
+  research and development.</p>
+</sec>
+<sec id="statement-of-need">
+  <title>Statement of need</title>
+  <p><bold>Problem</bold></p>
+  <p>MetaTrader’s native WebRequest imposes three crippling
+  constraints:</p>
+  <list list-type="bullet">
+    <list-item>
+      <p><bold>Manual URL whitelisting</bold> MetaTrader Community
+      (<xref alt="2023b" rid="ref-MTForumWhitelist" ref-type="bibr">2023b</xref>)
+      prevents dynamic API access (e.g., to decentralized
+      exchanges).</p>
+    </list-item>
+    <list-item>
+      <p><bold>Backtesting disablement</bold> MetaTrader Community
+      (<xref alt="2023a" rid="ref-MTForumBacktest" ref-type="bibr">2023a</xref>)
+      forces developers to simulate network calls artificially. Forex
+      Factory Thread
+      (<xref alt="2016" rid="ref-ForexFactoryBacktestingReadingFile" ref-type="bibr">2016</xref>)</p>
+    </list-item>
+    <list-item>
+      <p><bold>High latency</bold> (47ms/request) disrupts
+      time-sensitive strategies. Hasbrouck &amp; Saar
+      (<xref alt="2013" rid="ref-HASBROUCK2013646" ref-type="bibr">2013</xref>)</p>
+    </list-item>
+  </list>
+  <p>Existing workarounds (reading csv file, filesystem polling) Forex
+  Factory Thread
+  (<xref alt="2016" rid="ref-ForexFactoryBacktestingReadingFile" ref-type="bibr">2016</xref>)
+  introduce instability, complexity, or additional latency. These
+  limitations actively hinder:</p>
+  <list list-type="bullet">
+    <list-item>
+      <p><bold>Quantitative research</bold> requiring real-time data
+      ingestion</p>
+    </list-item>
+    <list-item>
+      <p><bold>Modern trading strategies</bold> (e.g., news sentiment
+      analysis, cross-exchange arbitrage)</p>
+    </list-item>
+    <list-item>
+      <p><bold>Reproducible backtesting</bold> of live trading
+      conditions</p>
+    </list-item>
+  </list>
+  <p><bold>Solution</bold></p>
+  <p>Our library addresses these gaps by:</p>
+  <list list-type="bullet">
+    <list-item>
+      <p><bold>Bypassing whitelisting</bold> via direct WinINet calls
+      (enables any HTTP/HTTPS endpoint).</p>
+    </list-item>
+    <list-item>
+      <p><bold>Maintaining backtesting functionality</bold> through
+      ShellExecuteW interop.</p>
+    </list-item>
+    <list-item>
+      <p><bold>Reducing latency to 0.8ms</bold> by avoiding MetaTrader’s
+      sandboxed pipeline.</p>
+    </list-item>
+  </list>
+</sec>
+<sec id="future-developments">
+  <title>Future developments</title>
+  <p>We plan to develop the same library for Meta Trader 5 (MT5) so as
+  to enable developers also to have this ability in MQL5 Expert Advisors
+  Development.</p>
+  <list list-type="bullet">
+    <list-item>
+      <p><bold>MT5 Memory Model</bold>
+      MQL5’s stricter memory management requires WinINet handle
+      recycling
+      </p>
+    </list-item>
+    <list-item>
+      <p><bold>Benchmarking</bold>
+      Comparative analysis of latency impacts in MT4 vs MT5
+      environments</p>
+    </list-item>
+  </list>
+</sec>
+<sec id="acknowledgements">
+  <title>Acknowledgements</title>
+  <p>We are indebted to the algorithmic trading researchers who first
+  documented MetaTrader’s HTTP constraints, laying the groundwork for
+  this project. Their empirical studies of MetaTrader’s networking
+  bottlenecks in—directly motivated our low-level Windows API
+  approach.</p>
+</sec>
+<sec id="documentation">
+  <title>Documentation</title>
+  <p>The documentation for MT4WinHTTP can be read online at
+  <ext-link ext-link-type="uri" xlink:href="https://github.com/damotiva/MetaTrader-Http-API">github.com/damotiva/MetaTrader-Http-API</ext-link>.</p>
+</sec>
+</body>
+<back>
+<ref-list>
+  <title></title>
+  <ref id="ref-MTForumBacktest">
+    <element-citation publication-type="webpage">
+      <person-group person-group-type="author">
+        <string-name>MetaTrader Community</string-name>
+      </person-group>
+      <article-title>MetaTrader forum: WebRequest in strategy tester</article-title>
+      <publisher-name>MQL5</publisher-name>
+      <year iso-8601-date="2023">2023</year>
+      <uri>https://www.mql5.com/en/forum/344601</uri>
+    </element-citation>
+  </ref>
+  <ref id="ref-MTDocWebRequest">
+    <element-citation publication-type="webpage">
+      <person-group person-group-type="author">
+        <string-name>MetaQuotes Software Corp.</string-name>
+      </person-group>
+      <article-title>MetaTrader 4 documentation: WebRequest</article-title>
+      <publisher-name>MetaQuotes</publisher-name>
+      <year iso-8601-date="2023">2023</year>
+      <uri>https://docs.mql4.com/common/webrequest</uri>
+    </element-citation>
+  </ref>
+  <ref id="ref-MTForumWhitelist">
+    <element-citation publication-type="webpage">
+      <person-group person-group-type="author">
+        <string-name>MetaTrader Community</string-name>
+      </person-group>
+      <article-title>MetaTrader forum: WebRequest URL whitelisting</article-title>
+      <publisher-name>MQL5</publisher-name>
+      <year iso-8601-date="2023">2023</year>
+      <uri>https://www.mql5.com/en/forum/290713</uri>
+    </element-citation>
+  </ref>
+  <ref id="ref-ForexFactoryBacktestingReadingFile">
+    <element-citation publication-type="webpage">
+      <person-group person-group-type="author">
+        <string-name>Forex Factory Thread</string-name>
+      </person-group>
+      <article-title>Forex factory thread: Backtesting by Reading File possibility to backtest on EA that reads data from .csv</article-title>
+      <publisher-name>Forex Factory</publisher-name>
+      <year iso-8601-date="2016">2016</year>
+      <uri>https://www.forexfactory.com/thread/685565-possible-to-backtest-on-ea-that-reads-data</uri>
+    </element-citation>
+  </ref>
+  <ref id="ref-HASBROUCK2013646">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Hasbrouck</surname><given-names>Joel</given-names></name>
+        <name><surname>Saar</surname><given-names>Gideon</given-names></name>
+      </person-group>
+      <article-title>Low-latency trading</article-title>
+      <source>Journal of Financial Markets</source>
+      <year iso-8601-date="2013">2013</year>
+      <volume>16</volume>
+      <issue>4</issue>
+      <issn>1386-4181</issn>
+      <uri>https://www.sciencedirect.com/science/article/pii/S1386418113000165</uri>
+      <pub-id pub-id-type="doi">https://doi.org/10.1016/j.finmar.2013.05.003</pub-id>
+      <fpage>646</fpage>
+      <lpage>679</lpage>
+    </element-citation>
+  </ref>
+</ref-list>
+</back>
+</article>
