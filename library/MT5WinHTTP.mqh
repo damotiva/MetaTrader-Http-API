@@ -1,10 +1,16 @@
 //+----------------------------------------------------------------------------+
 //|                                                                            |
-//| Titlte : MQl4 & MQL5 HTTP API                                              |
+//| Title : MQl5 HTTP API Library                                             |
 //| Enabling HTTP & HTTPS Requests in Live and Backtesting Environment         |
-//| Written By: Elijah E. Masanga                                              |  
-//| Research Paper:                                                            |
-//| DOI:                                                                       |  
+//| Written By: Elijah E. Masanga                                              |
+//|                                                                            | 
+//| Research Under Damotiva Innovations                                        |  
+//| Research Paper: MT5WinHTTP: A MetaTrader 5 Library for Bypassing           |
+//| WebRequest Restrictions via Low-Level Windows System Calls                 |
+//|                                                                            |
+//| DOI:                                                                       |
+//|                                                                            |
+//| Date: 1st June 2025                                                        |  
 //+----------------------------------------------------------------------------+
 
 #import "shell32.dll"
@@ -181,5 +187,5 @@ string httpPOST_JSON(string host, string path, string jsonData, int port = 443, 
 
 void httpOpen(string strUrl)
 {
-    Shell32::ShellExecuteW(0, "open", strUrl, "", "", 3);
+    ShellExecuteW(0, "open", strUrl, "", "", 3);
 }

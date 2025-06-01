@@ -1,6 +1,5 @@
 
-# Windows API Hacks for MetaTrader: Bypassing WebRequest Restrictions via Low-Level System Calls
-
+# MT4WinHTTP: A MetaTrader 4 Library for Bypassing WebRequest Restrictions via Low-Level Windows System Calls
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![MetaTrader 4/5](https://img.shields.io/badge/Platform-MetaTrader%204|5-blue)](https://www.metatrader5.com)
@@ -21,13 +20,6 @@ A lightweight MQL library that bypasses MetaTrader's HTTP restrictions using dir
    ```
 
 2. Copy the  `lirabry/`  folder to your MetaTrader  `MQL/Include`  directory:
-MQL4/
-└── Include/
-    └── Metatrader4HttpApi.mqh
-
-	MQL5/
-	└── Include/
-	    └── Metatrader5HttpApi.mqh
         
 ## Usage
 
