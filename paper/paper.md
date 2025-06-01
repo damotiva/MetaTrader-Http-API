@@ -26,9 +26,9 @@ bibliography: paper.bib
 
 MetaTrader 4 (MT4), a dominant platform for retail algorithmic trading, imposes restrictive HTTP communication policies—including URL whitelisting and disabled network access during backtesting[@MTForumBacktest; @MTDocWebRequest] hindering integration with external data sources (e.g., Decentralized Finances (DeFi) feeds, Machine Learning APIs, Web APIs, Telegram Signal Based APIs). We present MT4WinHTTP, an open-source MQL4 library that bypasses these limitations by leveraging direct Windows API calls (ShellExecuteW and WinINet). Key features include:
 
-    1. **Unrestricted web requests** (no whitelisting required).
-    2. **Backtesting-compatible** HTTP/HTTPS communication.
-    3. **Zero external dependencies**, deployable on standard MT4 installations.
+- **Unrestricted web requests** (no whitelisting required).
+- **Backtesting-compatible** HTTP/HTTPS communication.
+- **Zero external dependencies**, deployable on standard MT4 installations.
 
 The library bridges MT4 to modern trading infrastructure, enabling strategies reliant on real-time data (e.g., arbitrage, sentiment analysis) and seamless integration with external frameworks (Django, Laravel, Spring, ASP.NET). By decoupling MT4 from its native restrictions, MT4WinHTTP expands the scope of algorithmic trading research and development.
 
