@@ -38,23 +38,24 @@ The library bridges MT4 to modern trading infrastructure, enabling strategies re
 **Problem**
 
 MetaTrader's native WebRequest imposes three crippling constraints:
-    1. **Manual URL whitelisting** @MTForumWhitelist prevents dynamic API access (e.g., to decentralized exchanges).
-    2. **Backtesting disablement** @MTForumBacktest forces developers to simulate network calls artificially. @ForexFactoryBacktestingReadingFile
-    3. **High latency** (47ms/request) disrupts time-sensitive strategies. @HASBROUCK2013646
+
+- **Manual URL whitelisting** @MTForumWhitelist prevents dynamic API access (e.g., to decentralized exchanges).
+- **Backtesting disablement** @MTForumBacktest forces developers to simulate network calls artificially. @ForexFactoryBacktestingReadingFile
+- **High latency** (47ms/request) disrupts time-sensitive strategies. @HASBROUCK2013646
 
 Existing workarounds (reading csv file, filesystem polling) @ForexFactoryBacktestingReadingFile introduce instability, complexity, or additional latency. These limitations actively hinder:
-    1. **Quantitative research** requiring real-time data ingestion
-    2. **Modern trading strategies** (e.g., news sentiment analysis, cross-exchange arbitrage)
-    3. **Reproducible backtesting** of live trading conditions
+
+- **Quantitative research** requiring real-time data ingestion
+- **Modern trading strategies** (e.g., news sentiment analysis, cross-exchange arbitrage)
+- **Reproducible backtesting** of live trading conditions
 
 **Solution**
 
 Our library addresses these gaps by:
-    1. **Bypassing whitelisting** via direct WinINet calls (enables any HTTP/HTTPS endpoint).
-    2. **Maintaining backtesting functionality** through ShellExecuteW interop.
-    3. **Reducing latency to 0.8ms** by avoiding MetaTrader's sandboxed pipeline.
 
-
+- **Bypassing whitelisting** via direct WinINet calls (enables any HTTP/HTTPS endpoint).
+- **Maintaining backtesting functionality** through ShellExecuteW interop.
+- **Reducing latency to 0.8ms** by avoiding MetaTrader's sandboxed pipeline.
 
 # Future developments
 
