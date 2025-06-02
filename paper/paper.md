@@ -9,15 +9,17 @@ tags:
 authors:
   - name: Elijah E. Masanga
     orcid: 0000-0003-2397-9680
-    equal-contrib: true
     corresponding: true 
-    affiliation: "1, 2" 
+    affiliation: "1, 2, 3" 
 affiliations:
  - name: Damotiva, Mbeya, Tanzania
    index: 1
- - name: ITMO University, Saint Petersburg, Russia
+ - name: Aifrruis Laboratories, Mbeya, Tanzania
    index: 2
+ - name: ITMO University, Saint Petersburg, Russia
+   index: 3
    ror: 04txgxn49
+
 date: 2 June 2025
 bibliography: paper.bib
 ---
