@@ -5,6 +5,7 @@
 [![MetaTrader 4/5](https://img.shields.io/badge/Platform-MetaTrader%204|5-blue)](https://www.metatrader5.com)
 [![MQL4](https://img.shields.io/badge/Language-MQL4-orange)](https://www.mql4.com)
 [![MQL5](https://img.shields.io/badge/Language-MQL5-orange)](https://www.mql5.com)
+[![status](https://joss.theoj.org/papers/795d8f1b176c6cee46a2afd51e0a1fdf/status.svg)](https://joss.theoj.org/papers/795d8f1b176c6cee46a2afd51e0a1fdf)
 
 A lightweight MQL library that bypasses MetaTrader's HTTP restrictions using direct Windows API calls (`ShellExecuteW`/`WinINet`), enabling unconstrained web access during live trading and backtesting.
 
